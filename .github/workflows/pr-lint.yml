@@ -1,0 +1,28 @@
+name: PR HTML Lint
+
+on:
+  pull_request:
+
+jobs:
+  lint-html:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install htmlhint
+        run: npm install -g htmlhint
+      
+      - name: Lint HTML files
+        run: |
+          if find . -name '*.html' | head -1 | grep -q .; then
+            htmlhint '**/*.html'
+          else
+            echo "No HTML files found to lint"
+          fi
