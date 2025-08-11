@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+// Get unique categories
+const categories = [...new Set(posts.map(post => post.data.category))].sort();
+---
+
+<Layout title="Writing - Pravin's Blog">
+  <main>
+    <h1>Writing</h1>
+    
+    <section>
+      <p>Welcome to my writing corner. Here I share thoughts on technology, development, and life.</p>
+    </section>
+    
+    <section class="categories">
+      <h2>Categories</h2>
+      <div class="category-grid">
+        {categories.map(category => (
+          <a class="category-card" href={`/writing/${category.toLowerCase()}`}>
+            <h3>{category}</h3>
+            <p>{posts.filter(post => post.data.category === category).length} posts</p>
+          </a>
+        ))}
+      </div>
+    </section>
+    
+    <section class="recent-posts">
+      <h2>Recent Posts</h2>
+      <div class="posts-list">
+        {posts.slice(0, 5).map(post => (
+          <article class="post-preview">
+            <h3><a href={`/posts/${post.slug}`}>{post.data.title}</a></h3>
+            <p class="post-meta">{post.data.publishDate} • {post.data.category}</p>
+            <p>{post.data.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>
