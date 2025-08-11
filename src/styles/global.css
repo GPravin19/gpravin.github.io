@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom CSS Variables for White+Orange Theme */
+:root {
+  --color-primary: #ff6b35; /* Orange */
+  --color-primary-light: #ff8c6b;
+  --color-primary-dark: #e55a2b;
+  --color-secondary: #ffffff; /* White */
+  --color-accent: #f4a261; /* Light orange */
+  --color-neutral: #f8f9fa;
+  --color-neutral-dark: #6c757d;
+  --color-text: #212529;
+  --color-text-light: #6c757d;
+  --color-border: #e9ecef;
+}
+
+/* Custom Component Styles */
+@layer components {
+  .btn-primary {
+    @apply bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-white border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6 border border-gray-100;
+  }
+  
+  .text-primary {
+    color: var(--color-primary);
+  }
+  
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+}
+
+/* Custom Base Styles */
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-secondary);
+  }
+  
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  
+  .social-icon {
+    @apply w-6 h-6 text-gray-600 hover:text-orange-500 transition-colors duration-200;
+  }
+  
+  .nav-link {
+    @apply text-gray-700 hover:text-orange-500 font-medium transition-colors duration-200;
+  }
+  
+  .category-chip {
+    @apply inline-block bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full mr-2 mb-2 hover:bg-orange-200 transition-colors duration-200;
+  }
+}
